@@ -1,0 +1,2 @@
+# social-media
+A social media app using MongoDB, Express, Node, React, GraphQL and Node

@@ -1,0 +1,23 @@
+{
+  "name": "social-media",
+  "version": "1.0.0",
+  "description": "A social media app using MongoDB, Express, React, GraphQL and Node",
+  "main": "playground-1.mongodb.js",
+  "scripts": {
+    "start": "node --env-file=credentials.env index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github-private:ponjae/social-media.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "apollo-server": "^3.13.0",
+    "graphql": "^16.14.2",
+    "graphql-tag": "^2.12.7",
+    "mongoose": "^9.10.1"
+  }
+}

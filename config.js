@@ -7,5 +7,5 @@ if (!DB_USER || !DB_USER_PASSWORD) {
 export const CONFIG = {
   MONGO_DB: `mongodb+srv://${encodeURIComponent(DB_USER)}:${encodeURIComponent(
     DB_USER_PASSWORD,
-  )}@cluster0.9iq7ftv.mongodb.net/?appName=Cluster0`,
+  )}@cluster0.9iq7ftv.mongodb.net/social-media?appName=Cluster0`,
 };

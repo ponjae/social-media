@@ -2,9 +2,9 @@
   "name": "social-media",
   "version": "1.0.0",
   "description": "A social media app using MongoDB, Express, React, GraphQL and Node",
-  "main": "playground-1.mongodb.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node --env-file=credentials.env index.js"
+    "start": "nodemon --env-file=credentials.env index"
   },
   "repository": {
     "type": "git",
@@ -19,5 +19,8 @@
     "graphql": "^16.14.2",
     "graphql-tag": "^2.12.7",
     "mongoose": "^9.10.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }

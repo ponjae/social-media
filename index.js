@@ -1,19 +1,9 @@
 import { ApolloServer } from "apollo-server";
-import gql from "graphql-tag";
 import mongoose from "mongoose";
+
 import { CONFIG } from "./config.js";
-
-const typeDefs = gql`
-  type Query {
-    hello: String!
-  }
-`;
-
-const resolvers = {
-  Query: {
-    hello: () => "Hello world!!!",
-  },
-};
+import typeDefs from "./graphql/typedefs.js";
+import resolvers from "./graphql/resolvers/index.js";
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
@@ -25,4 +15,8 @@ mongoose
   })
   .then(({ url }) => {
     console.log(`🚀 Server ready at ${url}`);
+  })
+  .catch((error) => {
+    console.error("MongoDB connection failed:", error);
+    process.exit(1);
   });

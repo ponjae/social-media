@@ -4,10 +4,56 @@ import jwt from "jsonwebtoken";
 
 import Config from "../../config.js";
 import { User } from "../../models/User.js";
-import { validateRegisterInput } from "../../util/validators.js";
+import {
+  validateRegisterInput,
+  validateLoginInput,
+} from "../../util/validators.js";
+
+const generateToken = (user) =>
+  jwt.sign(
+    {
+      id: user._id,
+      email: user.email,
+      username: user.username,
+    },
+    Config.SECRET_KEY,
+    { expiresIn: "1h" },
+  );
 
 const resolvers = {
   Mutation: {
+    login: async (_, { username, password }) => {
+      const { errors, valid } = validateLoginInput(username, password);
+
+      // Validate user input
+      if (!valid) {
+        throw new UserInputError("Errors", { errors });
+      }
+
+      const user = await User.findOne({ username });
+
+      // Check if user exists
+      if (!user) {
+        errors.general = "User not found";
+        throw new UserInputError("User not found", { errors });
+      }
+
+      const match = await bcrypt.compare(password, user.password);
+
+      // Check if password matches
+      if (!match) {
+        errors.general = "Wrong credentials";
+        throw new UserInputError("Wrong credentials", { errors });
+      }
+
+      const token = generateToken(user);
+
+      return {
+        ...user._doc,
+        id: user._id,
+        token,
+      };
+    },
     register: async (
       _,
       { registerInput: { username, email, password, confirmPassword } },
@@ -45,13 +91,7 @@ const resolvers = {
       });
 
       const res = await newUser.save();
-      const token = jwt.sign(
-        { id: res._id, email, username },
-        Config.SECRET_KEY,
-        {
-          expiresIn: "1h",
-        },
-      );
+      const token = generateToken(res);
 
       return {
         ...res._doc,

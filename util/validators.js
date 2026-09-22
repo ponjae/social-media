@@ -1,3 +1,13 @@
+/**
+ * Validates the input for user registration.
+ *
+ * @param {string} username
+ * @param {string} email
+ * @param {string} password
+ * @param {string} confirmPassword
+ *
+ * @returns {{ errors: Object, valid: boolean }}
+ */
 export const validateRegisterInput = (
   username,
   email,
@@ -23,6 +33,30 @@ export const validateRegisterInput = (
     errors.password = "Password must not be empty";
   } else if (password !== confirmPassword) {
     errors.confirmPassword = "Passwords must match";
+  }
+
+  return {
+    errors,
+    valid: Object.keys(errors).length < 1,
+  };
+};
+
+/**
+ * Validates the input for user login.
+ *
+ * @param {string} username
+ * @param {string} password
+ * @returns {{ errors: Object, valid: boolean }}
+ */
+export const validateLoginInput = (username, password) => {
+  const errors = {};
+
+  if (!username || username.trim() === "") {
+    errors.username = "Username must not be empty";
+  }
+
+  if (!password || password === "") {
+    errors.password = "Password must not be empty";
   }
 
   return {

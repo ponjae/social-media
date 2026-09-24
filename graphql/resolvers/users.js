@@ -16,7 +16,7 @@ const generateToken = (user) =>
       email: user.email,
       username: user.username,
     },
-    Config.SECRET_KEY,
+    Config.JWT_SECRET,
     { expiresIn: "1h" },
   );
 

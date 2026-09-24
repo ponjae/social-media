@@ -8,7 +8,7 @@ export const CONFIG = {
   MONGO_DB: `mongodb+srv://${encodeURIComponent(DB_USER)}:${encodeURIComponent(
     DB_USER_PASSWORD,
   )}@cluster0.9iq7ftv.mongodb.net/social-media?appName=Cluster0`,
-  SECRET_KEY: JWT_SECRET,
+  JWT_SECRET,
 };
 
 export default CONFIG;

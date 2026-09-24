@@ -5,7 +5,11 @@ import CONFIG from "./config.js";
 import typeDefs from "./graphql/typedefs.js";
 import resolvers from "./graphql/resolvers/index.js";
 
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: ({ req }) => ({ req }),
+});
 
 mongoose
   .connect(CONFIG.MONGO_DB)

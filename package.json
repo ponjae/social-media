@@ -4,7 +4,8 @@
   "description": "A social media app using MongoDB, Express, React, GraphQL and Node",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --env-file=credentials.env index"
+    "start": "nodemon --env-file=credentials.env index",
+    "serve": "node --env-file=credentials.env index"
   },
   "repository": {
     "type": "git",

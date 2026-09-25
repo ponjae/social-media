@@ -1,4 +1,4 @@
-import { AuthenticationError } from "apollo-server";
+import { AuthenticationError, UserInputError } from "apollo-server";
 
 import { Post } from "../../models/Post.js";
 import checkAuth from "../../util/check-auth.js";
@@ -28,6 +28,14 @@ const resolvers = {
     createPost: async (_, { body }, context) => {
       // Check if the user is authenticated
       const user = checkAuth(context);
+
+      if (body.trim() === "") {
+        throw new UserInputError("Post body must not be empty", {
+          errors: {
+            body: "Post body must not be empty",
+          },
+        });
+      }
 
       const newPost = new Post({
         body,
@@ -66,6 +74,14 @@ const resolvers = {
     updatePost: async (_, { postId, body }, context) => {
       // Check if the user is authenticated
       const user = checkAuth(context);
+
+      if (body.trim() === "") {
+        throw new UserInputError("Post body must not be empty", {
+          errors: {
+            body: "Post body must not be empty",
+          },
+        });
+      }
 
       try {
         const post = await Post.findById(postId);

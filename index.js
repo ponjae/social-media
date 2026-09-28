@@ -1,14 +1,17 @@
 import { ApolloServer } from "apollo-server";
+import { PubSub } from "graphql-subscriptions";
 import mongoose from "mongoose";
 
 import CONFIG from "./config.js";
 import typeDefs from "./graphql/typeDefs.js";
 import resolvers from "./graphql/resolvers/index.js";
 
+const pubsub = new PubSub();
+
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req }) => ({ req }),
+  context: ({ req }) => ({ req, pubsub }),
 });
 
 mongoose

@@ -8,3 +8,12 @@
 .ui.grid > .row.home-page-title > h1 {
   margin: 0;
 }
+
+.form-container {
+  margin: 2rem auto;
+  max-width: 500px;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}

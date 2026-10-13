@@ -1,0 +1,10 @@
+/* Homepage: keep the "Recent Posts" heading clear of the menu bar.
+   Semantic's Grid uses a negative top margin, which pulls the first row up. */
+.ui.grid > .row.home-page-title {
+  margin-top: 2rem;
+  padding-bottom: 0.5rem;
+}
+
+.ui.grid > .row.home-page-title > h1 {
+  margin: 0;
+}

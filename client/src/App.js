@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Container } from "semantic-ui-react";
+import { AuthProvider } from "./context/auth";
+import AuthRoute from "./utils/AuthRoute";
 
 import HomePage from "./pages/Home";
 import LoginPage from "./pages/Login";
@@ -12,14 +14,18 @@ import "./App.css";
 const App = () => {
   return (
     <Router>
-      <Container>
-        <MenuBar />
-        <Routes>
-          <Route exact path="/" element={<HomePage />} />
-          <Route exact path="/login" element={<LoginPage />} />
-          <Route exact path="/register" element={<RegisterPage />} />
-        </Routes>
-      </Container>
+      <AuthProvider>
+        <Container>
+          <MenuBar />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route element={<AuthRoute />}>
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
+            </Route>
+          </Routes>
+        </Container>
+      </AuthProvider>
     </Router>
   );
 };

@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Form, Button } from "semantic-ui-react";
 import { LOGIN_USER } from "../utils/mutations";
 import { useMutation } from "@apollo/client/react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../utils/hooks";
+import { AuthContext } from "../context/auth";
 
 const Login = () => {
-  const navigate = useNavigate();
   const [errors, setErrors] = useState();
+  const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const { formData, onChange, onSubmit } = useForm(onLogin, {
     username: "",
@@ -15,7 +17,8 @@ const Login = () => {
   });
 
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
-    onCompleted() {
+    update(_, { data: { login: userData } }) {
+      login(userData);
       navigate("/");
     },
     onError(err) {

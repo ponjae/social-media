@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { useQuery } from "@apollo/client/react";
 import { FETCH_POSTS_QUERY } from "../utils/queries";
-import { GridRow, GridColumn, Grid } from "semantic-ui-react";
+import { GridRow, GridColumn, Grid, Transition } from "semantic-ui-react";
 import { AuthContext } from "../context/auth";
 import PostCard from "../components/PostCard";
 import PostForm from "../components/PostForm";
@@ -26,12 +26,15 @@ const Home = () => {
       ) : error ? (
         <p>Unable to load posts: {error.message}</p>
       ) : (
-        posts &&
-        posts.map((post) => (
-          <GridColumn key={post.id} style={{ marginBottom: "20px" }}>
-            <PostCard post={post} />
-          </GridColumn>
-        ))
+        posts && (
+          <Transition.Group>
+            {posts.map((post) => (
+              <GridColumn key={post.id} style={{ marginBottom: "20px" }}>
+                <PostCard post={post} />
+              </GridColumn>
+            ))}
+          </Transition.Group>
+        )
       )}
     </Grid>
   );

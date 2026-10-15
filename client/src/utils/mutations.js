@@ -42,3 +42,16 @@ export const CREATE_POST = gql`
     }
   }
 `;
+
+export const TOGGLE_LIKE = gql`
+  mutation toggleLikePost($postId: ID!) {
+    toggleLikePost(postId: $postId) {
+      id
+      likes {
+        id
+        username
+        createdAt
+      }
+    }
+  }
+`;

@@ -101,6 +101,29 @@ const resolvers = {
         throw new Error(err);
       }
     },
+    toggleLikePost: async (_, { postId }, context) => {
+      const user = checkAuth(context);
+      const post = await Post.findById(postId);
+
+      if (!post) {
+        throw new UserInputError("Post not found");
+      }
+
+      const likeIndex = post.likes.findIndex(
+        (like) => like.username === user.username
+      );
+
+      if (likeIndex === -1) {
+        post.likes.push({
+          username: user.username,
+          createdAt: new Date().toISOString(),
+        });
+      } else {
+        post.likes.splice(likeIndex, 1);
+      }
+
+      return post.save();
+    },
   },
 };
 

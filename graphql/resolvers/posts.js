@@ -1,20 +1,42 @@
 import { AuthenticationError, UserInputError } from "apollo-server";
 
 import { Post } from "../../models/Post.js";
+import { User } from "../../models/User.js";
 import checkAuth from "../../util/check-auth.js";
 
 const resolvers = {
+  Post: {
+    avatar: async (post) => {
+      const author = post.user;
+      if (!author) {
+        return null;
+      }
+
+      if (author.avatar !== undefined) {
+        return author.avatar;
+      }
+
+      if (post.populated?.("user")) {
+        return null;
+      }
+
+      const user = await User.findById(author).select("avatar");
+      return user?.avatar ?? null;
+    },
+  },
   Query: {
     getPosts: async () => {
       try {
-        return await Post.find().sort({ createdAt: -1 });
+        return await Post.find()
+          .populate("user", "avatar")
+          .sort({ createdAt: -1 });
       } catch (err) {
         throw new Error(err);
       }
     },
     getPost: async (_, { postId }) => {
       try {
-        const post = await Post.findById(postId);
+        const post = await Post.findById(postId).populate("user", "avatar");
         if (!post) {
           throw new Error("Post not found");
         }

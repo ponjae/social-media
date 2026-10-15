@@ -6,7 +6,7 @@ import { AuthContext } from "../context/auth";
 import LikeButton from "./LikeButton";
 
 const PostCard = ({
-  post: { id, body, createdAt, username, likes, comments },
+  post: { id, body, createdAt, username, avatar, likes, comments },
 }) => {
   const { user } = useContext(AuthContext);
 
@@ -15,11 +15,7 @@ const PostCard = ({
   return (
     <Card fluid>
       <Card.Content as={Link} to={`/posts/${id}`}>
-        <Image
-          floated="right"
-          size="mini"
-          src="https://react.semantic-ui.com/images/avatar/large/molly.png"
-        />
+        <Image floated="right" size="mini" src={avatar} />
         <Card.Header>{username}</Card.Header>
         <Card.Meta>{moment(createdAt).fromNow(true)}</Card.Meta>
         <Card.Description>{body}</Card.Description>

@@ -1,0 +1,152 @@
+/* AvatarSelector: Semantic UI radio buttons restyled as avatar tiles */
+
+.ui.form fieldset.avatar-selector {
+  border: 0;
+  padding: 0;
+  margin: 0 0 1.25em;
+  min-width: 0;
+}
+
+.avatar-selector__legend {
+  padding: 0;
+  margin: 0 0 0.15rem;
+  font-size: 0.92857143em;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.avatar-selector__hint {
+  margin: 0 0 0.75rem;
+  font-size: 0.85em;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.avatar-selector__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  gap: 0.75rem;
+}
+
+/* Radio wrapper */
+.ui.form .avatar-selector .ui.radio.checkbox.avatar-selector__option {
+  display: block;
+  min-height: 0;
+  line-height: 1;
+}
+
+/* Label becomes the tile */
+.ui.form .avatar-selector .ui.radio.checkbox.avatar-selector__option label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(34, 36, 38, 0.12);
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease,
+    transform 0.15s ease, background-color 0.15s ease;
+}
+
+/* Hide Semantic's default radio bullet */
+.ui.form .avatar-selector .ui.radio.checkbox.avatar-selector__option label::before,
+.ui.form .avatar-selector .ui.radio.checkbox.avatar-selector__option label::after {
+  display: none !important;
+}
+
+.ui.form .avatar-selector .ui.radio.checkbox.avatar-selector__option label:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(34, 36, 38, 0.15);
+}
+
+.avatar-selector .avatar-selector__image.ui.image {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  background: #e8e8e8;
+  filter: grayscale(35%);
+  opacity: 0.85;
+  transition: filter 0.15s ease, opacity 0.15s ease;
+}
+
+.avatar-selector__option label:hover .avatar-selector__image.ui.image {
+  filter: none;
+  opacity: 1;
+}
+
+.ui.form .avatar-selector .avatar-selector__check.icon {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #2185d0;
+  color: #fff;
+  font-size: 0.7rem;
+  line-height: 18px;
+  text-align: center;
+  opacity: 0;
+  transform: scale(0.4);
+  transition: opacity 0.15s ease,
+    transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Selected (Semantic adds `.checked` to the radio wrapper) */
+.ui.form .avatar-selector .ui.radio.checkbox.avatar-selector__option.checked label {
+  border-color: #2185d0;
+  background: #f1f8fe;
+  box-shadow: 0 0 0 3px rgba(33, 133, 208, 0.15);
+}
+
+.avatar-selector__option.checked .avatar-selector__image.ui.image {
+  filter: none;
+  opacity: 1;
+}
+
+.ui.form .avatar-selector .avatar-selector__option.checked .avatar-selector__check.icon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Keyboard focus */
+.ui.form .avatar-selector .ui.radio.checkbox.avatar-selector__option input:focus-visible ~ label {
+  outline: 3px solid #85b7d9;
+  outline-offset: 2px;
+}
+
+/* Error */
+.ui.form .field.error.avatar-selector .avatar-selector__legend {
+  color: #9f3a38;
+}
+
+.ui.form .field.error.avatar-selector .ui.radio.checkbox.avatar-selector__option:not(.checked) label {
+  border-color: #e0b4b4;
+  background: #fff6f6;
+}
+
+.ui.form .avatar-selector .avatar-selector__error.ui.label {
+  margin-top: 0.75rem;
+}
+
+@media (max-width: 480px) {
+  .avatar-selector__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui.form .avatar-selector .ui.radio.checkbox.avatar-selector__option label,
+  .avatar-selector .avatar-selector__image.ui.image,
+  .ui.form .avatar-selector .avatar-selector__check.icon {
+    transition: none;
+  }
+
+  .ui.form .avatar-selector .ui.radio.checkbox.avatar-selector__option label:hover {
+    transform: none;
+  }
+}

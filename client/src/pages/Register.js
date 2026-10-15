@@ -5,6 +5,7 @@ import { useMutation } from "@apollo/client/react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../utils/hooks";
 import { AuthContext } from "../context/auth";
+import AvatarSelector from "../components/AvatarSelector";
 
 const Register = () => {
   const [errors, setErrors] = useState();
@@ -16,6 +17,7 @@ const Register = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    avatar: "",
   });
 
   const [registerUser, { loading }] = useMutation(REGISTER_USER, {
@@ -33,6 +35,11 @@ const Register = () => {
   function addUser() {
     registerUser();
   }
+
+  // Avatar errors are shown inline next to the picker, so skip them here
+  const generalErrors = Object.entries(errors || {})
+    .filter(([field]) => field !== "avatar")
+    .map(([, message]) => message);
 
   return (
     <div className="form-container">
@@ -72,17 +79,22 @@ const Register = () => {
           error={!!errors?.confirmPassword}
           onChange={onChange}
         />
+        <AvatarSelector
+          name="avatar"
+          value={formData.avatar}
+          onChange={onChange}
+          error={errors?.avatar}
+        />
         <Button type="submit" primary>
           Register
         </Button>
       </Form>
-      {errors && Object.keys(errors).length > 0 && (
+      {generalErrors.length > 0 && (
         <div className="ui error message">
           <ul className="list">
-            {errors &&
-              Object.values(errors).map((value) => (
-                <li key={value}>{value}</li>
-              ))}
+            {generalErrors.map((value) => (
+              <li key={value}>{value}</li>
+            ))}
           </ul>
         </div>
       )}

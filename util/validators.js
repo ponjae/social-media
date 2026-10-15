@@ -5,6 +5,7 @@
  * @param {string} email
  * @param {string} password
  * @param {string} confirmPassword
+ * @param {string} avatar
  *
  * @returns {{ errors: Object, valid: boolean }}
  */
@@ -13,6 +14,7 @@ export const validateRegisterInput = (
   email,
   password,
   confirmPassword,
+  avatar,
 ) => {
   const errors = {};
 
@@ -27,6 +29,10 @@ export const validateRegisterInput = (
     if (!email.match(regEx)) {
       errors.email = "Email must be a valid email address";
     }
+  }
+
+  if (!avatar || avatar.trim() === "") {
+    errors.avatar = "Avatar must not be empty";
   }
 
   if (!password || password === "") {

@@ -6,6 +6,7 @@ export const REGISTER_USER = gql`
       id
       username
       email
+      avatar
       token
     }
   }
@@ -17,6 +18,7 @@ export const LOGIN_USER = gql`
       id
       username
       email
+      avatar
       token
     }
   }

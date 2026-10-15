@@ -3,6 +3,9 @@ import userResolvers from "./users.js";
 import commentResolvers from "./comments.js";
 
 const resolvers = {
+  Post: {
+    ...postResolvers.Post,
+  },
   Query: {
     ...postResolvers.Query,
     ...userResolvers.Query,

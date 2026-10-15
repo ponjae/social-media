@@ -15,6 +15,7 @@ const generateToken = (user) =>
       id: user._id,
       email: user.email,
       username: user.username,
+      avatar: user.avatar,
     },
     Config.JWT_SECRET,
     { expiresIn: "1h" },
@@ -56,7 +57,15 @@ const resolvers = {
     },
     register: async (
       _,
-      { registerInput: { username, email, password, confirmPassword } },
+      {
+        registerInput: {
+          username,
+          email,
+          password,
+          confirmPassword,
+          avatar,
+        },
+      },
     ) => {
       // Validate user input
       const { errors, valid } = validateRegisterInput(
@@ -64,6 +73,7 @@ const resolvers = {
         email,
         password,
         confirmPassword,
+        avatar,
       );
 
       if (!valid) {
@@ -87,6 +97,7 @@ const resolvers = {
         email,
         username,
         password,
+        avatar,
         createdAt: new Date().toISOString(),
       });
 

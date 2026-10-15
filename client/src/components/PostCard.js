@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import { AuthContext } from "../context/auth";
 import LikeButton from "./LikeButton";
+import "./PostCard.css";
 
 const PostCard = ({
   post: { id, body, createdAt, username, avatar, likes, comments },
@@ -20,32 +21,23 @@ const PostCard = ({
         <Card.Meta>{moment(createdAt).fromNow(true)}</Card.Meta>
         <Card.Description>{body}</Card.Description>
       </Card.Content>
-      <Card.Content
-        extra
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
-          gap: "0.5em",
-        }}
-      >
+      <Card.Content extra className="post-card__footer">
         <div>
           <LikeButton user={user} post={{ id, likes }} />
-          <Label style={{ cursor: "pointer" }} as={Link} to={`/posts/${id}`}>
+          <Label className="post-card__clickable" as={Link} to={`/posts/${id}`}>
             <Icon name="comment" />
             {commentCount} {commentCount === 1 ? "Comment" : "Comments"}
           </Label>
         </div>
 
         {user && user.username === username && (
-          <div style={{ marginLeft: "auto" }}>
+          <div className="post-card__owner-actions">
             <Label as={Link} to={`/posts/${id}`}>
               <Icon name="edit" />
               Edit
             </Label>
-            <Label style={{ cursor: "pointer" }} title="Delete post">
-              <Icon name="trash" style={{ margin: 0 }} />
+            <Label className="post-card__clickable" title="Delete post">
+              <Icon name="trash" className="post-card__trash-icon" />
             </Label>
           </div>
         )}

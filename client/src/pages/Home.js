@@ -5,6 +5,7 @@ import { GridRow, GridColumn, Grid, Transition } from "semantic-ui-react";
 import { AuthContext } from "../context/auth";
 import PostCard from "../components/PostCard";
 import PostForm from "../components/PostForm";
+import "./Home.css";
 
 const Home = () => {
   const { user } = useContext(AuthContext);
@@ -29,7 +30,7 @@ const Home = () => {
         posts && (
           <Transition.Group>
             {posts.map((post) => (
-              <GridColumn key={post.id} style={{ marginBottom: "20px" }}>
+              <GridColumn key={post.id} className="home__post-column">
                 <PostCard post={post} />
               </GridColumn>
             ))}

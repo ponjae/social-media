@@ -7,6 +7,7 @@ import HomePage from "./pages/Home";
 import LoginPage from "./pages/Login";
 import RegisterPage from "./pages/Register";
 import MenuBar from "./components/MenuBar";
+import PostPage from "./pages/PostPage";
 
 import "semantic-ui-css/semantic.min.css";
 import "./App.css";
@@ -23,6 +24,7 @@ const App = () => {
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
             </Route>
+            <Route exact path="/posts/:id" element={<PostPage />} />
           </Routes>
         </Container>
       </AuthProvider>

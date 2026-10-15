@@ -1,0 +1,5 @@
+/* Scoped to the like button label. */
+
+.ui.label.like-button {
+  cursor: pointer;
+}

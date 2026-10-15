@@ -87,7 +87,7 @@ const resolvers = {
           throw new AuthenticationError("Action not allowed");
         }
 
-        await post.delete();
+        await post.deleteOne();
         return "Post deleted successfully";
       } catch (err) {
         throw new Error(err);

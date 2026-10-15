@@ -1,7 +1,7 @@
 import { Label, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client/react";
-import { TOGGLE_LIKE } from "../utils/mutations";
+import { TOGGLE_LIKE } from "../../utils/mutations";
 import "./LikeButton.css";
 
 const LikeButton = ({ user, post: { likes, id } }) => {

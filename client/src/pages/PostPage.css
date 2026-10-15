@@ -1,0 +1,89 @@
+/* Scoped to the post detail page via the .post-page root class. */
+
+.post-page {
+  padding: 2rem 0 3rem;
+}
+
+.post-page .post-page__loading {
+  min-height: 12rem;
+}
+
+.post-page .ui.segment.post-page__card {
+  padding: 2rem 2.25rem 1.5rem;
+  border-radius: 0.75rem;
+}
+
+.post-page .post-page__author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.post-page .ui.avatar.image.post-page__avatar {
+  width: 3.5rem;
+  height: 3.5rem;
+  margin: 0;
+  flex-shrink: 0;
+  object-fit: cover;
+  box-shadow: 0 0 0 3px #fff, 0 0 0 4px rgba(34, 36, 38, 0.15);
+}
+
+.post-page .ui.header.post-page__author-text {
+  margin: 0;
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+.post-page .ui.header.post-page__author-text .sub.header {
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.post-page .post-page__body {
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: rgba(0, 0, 0, 0.87);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.post-page .ui.divider.post-page__divider {
+  margin: 1.75rem 0 1.25rem;
+}
+
+.post-page .post-page__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.post-page .post-page__actions .ui.label {
+  margin: 0;
+}
+
+.post-page .post-page__actions .ui.label.post-page__comment-count {
+  cursor: pointer;
+}
+
+@media (max-width: 767px) {
+  .post-page {
+    padding: 1rem 0 2rem;
+  }
+
+  .post-page .ui.segment.post-page__card {
+    padding: 1.25rem 1.25rem 1rem;
+  }
+
+  .post-page .ui.avatar.image.post-page__avatar {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .post-page .post-page__body {
+    font-size: 1.05rem;
+  }
+}

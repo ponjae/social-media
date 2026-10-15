@@ -3,7 +3,8 @@ import { Card, Icon, Label, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { AuthContext } from "../context/auth";
-import LikeButton from "./LikeButton";
+import LikeButton from "./Buttons/LikeButton";
+import DeleteButton from "./Buttons/DeleteButton";
 import "./PostCard.css";
 
 const PostCard = ({
@@ -36,9 +37,7 @@ const PostCard = ({
               <Icon name="edit" />
               Edit
             </Label>
-            <Label className="post-card__clickable" title="Delete post">
-              <Icon name="trash" className="post-card__trash-icon" />
-            </Label>
+            <DeleteButton postId={id} />
           </div>
         )}
       </Card.Content>

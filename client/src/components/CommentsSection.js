@@ -13,6 +13,7 @@ import {
 } from "semantic-ui-react";
 import moment from "moment";
 import { CREATE_COMMENT, DELETE_COMMENT } from "../utils/mutations";
+import "./Buttons/DeleteButton.css";
 import "./CommentsSection.css";
 
 const getErrorMessage = (err, fallback) => {
@@ -116,18 +117,24 @@ const DeleteCommentAction = ({ postId, commentId, onError }) => {
 
   return (
     <>
-      <Comment.Action
+      {/* Same look as the post's DeleteButton (shared .delete-button styles),
+          but wired to DELETE_COMMENT. */}
+      <Label
         as="button"
         type="button"
-        className="comments-section__delete"
+        className="delete-button comments-section__delete"
         aria-label="Delete comment"
+        title="Delete comment"
         aria-busy={loading || undefined}
         disabled={loading}
         onClick={() => setConfirmOpen(true)}
       >
-        <Icon name={loading ? "spinner" : "trash"} loading={loading} />
-        Delete
-      </Comment.Action>
+        <Icon
+          name={loading ? "spinner" : "trash"}
+          loading={loading}
+          className="delete-button__icon"
+        />
+      </Label>
       <Confirm
         open={confirmOpen}
         size="tiny"
@@ -164,15 +171,6 @@ const CommentItem = ({ postId, comment, user }) => {
           </time>
         </Comment.Metadata>
         <Comment.Text className="comments-section__text">{body}</Comment.Text>
-        {isAuthor && (
-          <Comment.Actions>
-            <DeleteCommentAction
-              postId={postId}
-              commentId={id}
-              onError={setError}
-            />
-          </Comment.Actions>
-        )}
         {error && (
           <Message
             negative
@@ -182,6 +180,13 @@ const CommentItem = ({ postId, comment, user }) => {
           />
         )}
       </Comment.Content>
+      {isAuthor && (
+        <DeleteCommentAction
+          postId={postId}
+          commentId={id}
+          onError={setError}
+        />
+      )}
     </Comment>
   );
 };

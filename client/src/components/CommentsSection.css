@@ -32,37 +32,21 @@ section.ui.comments.comments-section > .comment:last-child {
   overflow-wrap: anywhere;
 }
 
-.ui.comments.comments-section .comment .actions .comments-section__delete {
-  padding: 0;
-  border: 0;
-  background: none;
-  font: inherit;
-  color: rgba(0, 0, 0, 0.4);
-  cursor: pointer;
+section.ui.comments.comments-section > .comment {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
 }
 
-.ui.comments.comments-section .comment .actions .comments-section__delete:hover,
-.ui.comments.comments-section
-  .comment
-  .actions
-  .comments-section__delete:focus-visible {
-  color: #db2828;
+.ui.comments.comments-section > .comment > .content {
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
-.ui.comments.comments-section
-  .comment
-  .actions
-  .comments-section__delete:focus-visible {
-  outline: 2px solid #db2828;
-  outline-offset: 2px;
-}
-
-.ui.comments.comments-section
-  .comment
-  .actions
-  .comments-section__delete:disabled {
-  cursor: progress;
-  opacity: 0.6;
+.ui.comments.comments-section > .comment > .ui.label.comments-section__delete {
+  flex: none;
+  align-self: center;
+  margin: 0;
 }
 
 .ui.comments.comments-section .comment .ui.message {

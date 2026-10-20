@@ -91,3 +91,12 @@ export const DELETE_COMMENT = gql`
     }
   }
 `;
+
+export const UPDATE_POST = gql`
+  mutation updatePost($postId: ID!, $body: String!) {
+    updatePost(postId: $postId, body: $body) {
+      id
+      body
+    }
+  }
+`;

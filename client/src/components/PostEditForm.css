@@ -1,0 +1,39 @@
+/* Scoped to the inline post editor. */
+
+.ui.form.post-edit-form textarea {
+  min-height: 8em;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.ui.form.post-edit-form .ui.message {
+  margin: 0 0 1rem;
+}
+
+.post-edit-form .post-edit-form__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.post-edit-form .post-edit-form__hint {
+  font-size: 0.875rem;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.post-edit-form .post-edit-form__hint--warn {
+  color: #9f3a38;
+}
+
+.post-edit-form .post-edit-form__buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.post-edit-form .post-edit-form__buttons .ui.button {
+  margin: 0;
+}

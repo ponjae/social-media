@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useQuery } from "@apollo/client/react";
 import moment from "moment";
 import { FETCH_POST_QUERY } from "../utils/queries";
@@ -17,6 +17,7 @@ import LikeButton from "../components/Buttons/LikeButton";
 import EditButton from "../components/Buttons/EditButton";
 import DeleteButton from "../components/Buttons/DeleteButton";
 import CommentsSection from "../components/CommentsSection";
+import PostEditForm from "../components/PostEditForm";
 import { AuthContext } from "../context/auth";
 import availableAvatars from "../utils/avatars";
 import "./PostPage.css";
@@ -26,6 +27,17 @@ const PostPage = () => {
   const { id: postId } = useParams();
   const navigate = useNavigate();
   const [deleteError, setDeleteError] = useState(null);
+
+  const [editingPostId, setEditingPostId] = useState(null);
+  const ownerActionsRef = useRef(null);
+  const restoreFocusRef = useRef(false);
+
+  useEffect(() => {
+    if (editingPostId === null && restoreFocusRef.current) {
+      restoreFocusRef.current = false;
+      ownerActionsRef.current?.querySelector(".edit-button")?.focus();
+    }
+  }, [editingPostId]);
 
   const {
     data: { getPost: post } = {},
@@ -61,6 +73,21 @@ const PostPage = () => {
   const { body, createdAt, username, avatar, comments } = post;
   const created = moment(createdAt);
   const isOwner = Boolean(user && user.username === username);
+  const isEditing = isOwner && editingPostId === post.id;
+
+  if (editingPostId && !isEditing) {
+    setEditingPostId(null);
+  }
+
+  const startEditing = () => {
+    setDeleteError(null);
+    setEditingPostId(post.id);
+  };
+
+  const stopEditing = () => {
+    restoreFocusRef.current = true;
+    setEditingPostId(null);
+  };
 
   const handleDeleted = () => {
     navigate("/", { replace: true });
@@ -89,7 +116,17 @@ const PostPage = () => {
           </Header>
         </header>
 
-        <p className="post-page__body">{body}</p>
+        {isEditing ? (
+          <PostEditForm
+            key={post.id}
+            postId={post.id}
+            body={body}
+            onCancel={stopEditing}
+            onSaved={stopEditing}
+          />
+        ) : (
+          <p className="post-page__body">{body}</p>
+        )}
 
         <Divider className="post-page__divider" />
 
@@ -109,9 +146,9 @@ const PostPage = () => {
             <LikeButton user={user} post={post} />
           </div>
 
-          {isOwner && (
-            <div className="post-page__owner-actions">
-              <EditButton />
+          {isOwner && !isEditing && (
+            <div className="post-page__owner-actions" ref={ownerActionsRef}>
+              <EditButton onClick={startEditing} />
               <DeleteButton
                 postId={post.id}
                 onDeleted={handleDeleted}

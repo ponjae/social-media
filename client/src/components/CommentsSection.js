@@ -10,6 +10,7 @@ import {
   Icon,
   Label,
   Message,
+  Popup,
 } from "semantic-ui-react";
 import moment from "moment";
 import { CREATE_COMMENT, DELETE_COMMENT } from "../utils/mutations";
@@ -117,24 +118,27 @@ const DeleteCommentAction = ({ postId, commentId, onError }) => {
 
   return (
     <>
-      {/* Same look as the post's DeleteButton (shared .delete-button styles),
-          but wired to DELETE_COMMENT. */}
-      <Label
-        as="button"
-        type="button"
-        className="delete-button comments-section__delete"
-        aria-label="Delete comment"
-        title="Delete comment"
-        aria-busy={loading || undefined}
-        disabled={loading}
-        onClick={() => setConfirmOpen(true)}
-      >
-        <Icon
-          name={loading ? "spinner" : "trash"}
-          loading={loading}
-          className="delete-button__icon"
-        />
-      </Label>
+      <Popup
+        content="Delete comment"
+        trigger={
+          <Label
+            as="button"
+            type="button"
+            className="delete-button comments-section__delete"
+            aria-label="Delete comment"
+            title="Delete comment"
+            aria-busy={loading || undefined}
+            disabled={loading}
+            onClick={() => setConfirmOpen(true)}
+          >
+            <Icon
+              name={loading ? "spinner" : "trash"}
+              loading={loading}
+              className="delete-button__icon"
+            />
+          </Label>
+        }
+      />
       <Confirm
         open={confirmOpen}
         size="tiny"

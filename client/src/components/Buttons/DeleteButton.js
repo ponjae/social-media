@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Label, Icon, Confirm } from "semantic-ui-react";
+import { Label, Icon, Confirm, Popup } from "semantic-ui-react";
 import { DELETE_POST } from "../../utils/mutations";
 import { FETCH_POSTS_QUERY } from "../../utils/queries";
 import { useMutation } from "@apollo/client/react";
@@ -35,22 +35,27 @@ const DeleteButton = ({ postId, onDeleted, onError }) => {
 
   return (
     <>
-      <Label
-        as="button"
-        type="button"
-        className="delete-button"
-        aria-label="Delete post"
-        title="Delete post"
-        aria-busy={loading || undefined}
-        disabled={loading}
-        onClick={() => setConfirmOpen(true)}
-      >
-        <Icon
-          name={loading ? "spinner" : "trash"}
-          loading={loading}
-          className="delete-button__icon"
-        />
-      </Label>
+      <Popup
+        content="Delete post"
+        trigger={
+          <Label
+            as="button"
+            type="button"
+            className="delete-button"
+            aria-label="Delete post"
+            title="Delete post"
+            aria-busy={loading || undefined}
+            disabled={loading}
+            onClick={() => setConfirmOpen(true)}
+          >
+            <Icon
+              name={loading ? "spinner" : "trash"}
+              loading={loading}
+              className="delete-button__icon"
+            />
+          </Label>
+        }
+      />
       <Confirm
         open={confirmOpen}
         onCancel={() => setConfirmOpen(false)}

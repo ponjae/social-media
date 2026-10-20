@@ -1,0 +1,84 @@
+.ui.comments.comments-section {
+  max-width: none;
+  margin-top: 2rem;
+  scroll-margin-top: 1rem;
+}
+
+section.ui.comments.comments-section > .comment {
+  margin: 0 0 0.75rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  border-radius: 0.5rem;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(34, 36, 38, 0.08);
+}
+
+section.ui.comments.comments-section > .comment:last-child {
+  margin-bottom: 0;
+}
+
+.ui.comments.comments-section > .reply.form.comments-section__form {
+  margin-bottom: 1.5rem;
+}
+
+.ui.comments.comments-section .reply.form textarea {
+  height: auto;
+  min-height: 5em;
+  resize: vertical;
+}
+
+.ui.comments.comments-section .comment .text.comments-section__text {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.ui.comments.comments-section .comment .actions .comments-section__delete {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+.ui.comments.comments-section .comment .actions .comments-section__delete:hover,
+.ui.comments.comments-section
+  .comment
+  .actions
+  .comments-section__delete:focus-visible {
+  color: #db2828;
+}
+
+.ui.comments.comments-section
+  .comment
+  .actions
+  .comments-section__delete:focus-visible {
+  outline: 2px solid #db2828;
+  outline-offset: 2px;
+}
+
+.ui.comments.comments-section
+  .comment
+  .actions
+  .comments-section__delete:disabled {
+  cursor: progress;
+  opacity: 0.6;
+}
+
+.ui.comments.comments-section .comment .ui.message {
+  margin-top: 0.5em;
+}
+
+.comments-section .ui.message.comments-section__signed-out .ui.button {
+  margin: 0.25em 0.5em 0 0;
+}
+
+@media (max-width: 480px) {
+  section.ui.comments.comments-section > .comment {
+    padding: 0.75rem;
+  }
+
+  .comments-section .ui.message.comments-section__signed-out > .icon {
+    display: none;
+  }
+}

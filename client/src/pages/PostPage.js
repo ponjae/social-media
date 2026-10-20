@@ -14,9 +14,9 @@ import {
 } from "semantic-ui-react";
 import { useNavigate, useParams } from "react-router-dom";
 import LikeButton from "../components/Buttons/LikeButton";
-import CommentButton from "../components/Buttons/CommentButton";
 import EditButton from "../components/Buttons/EditButton";
 import DeleteButton from "../components/Buttons/DeleteButton";
+import CommentsSection from "../components/CommentsSection";
 import { AuthContext } from "../context/auth";
 import availableAvatars from "../utils/avatars";
 import "./PostPage.css";
@@ -58,7 +58,7 @@ const PostPage = () => {
     );
   }
 
-  const { body, createdAt, username, avatar } = post;
+  const { body, createdAt, username, avatar, comments } = post;
   const created = moment(createdAt);
   const isOwner = Boolean(user && user.username === username);
 
@@ -107,7 +107,6 @@ const PostPage = () => {
         <footer className="post-page__actions">
           <div className="post-page__reactions">
             <LikeButton user={user} post={post} />
-            <CommentButton user={user} post={post} />
           </div>
 
           {isOwner && (
@@ -122,6 +121,7 @@ const PostPage = () => {
           )}
         </footer>
       </Segment>
+      <CommentsSection postId={post.id} comments={comments} user={user} />
     </Container>
   );
 };

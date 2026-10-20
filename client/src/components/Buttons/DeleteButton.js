@@ -13,8 +13,8 @@ const DeleteButton = ({ postId, onDeleted, onError }) => {
     refetchQueries: [{ query: FETCH_POSTS_QUERY }],
     awaitRefetchQueries: true,
     onCompleted() {
-      onDeleted(postId);
       setConfirmOpen(false);
+      onDeleted?.();
     },
     onError(err) {
       console.error(err);

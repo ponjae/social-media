@@ -1,3 +1,22 @@
+.ui.label.delete-button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
 .ui.label.delete-button:hover {
-  background-color: rgba(255, 0, 0, 0.1);
+  background-color: rgba(255, 0, 0, 0.474);
+}
+
+.ui.label.delete-button:focus-visible {
+  outline: 2px solid #db2828;
+  outline-offset: 2px;
+}
+
+.ui.label.delete-button:disabled {
+  cursor: progress;
+  opacity: 0.6;
+}
+
+.ui.label.delete-button > .icon.delete-button__icon {
+  margin: 0;
 }

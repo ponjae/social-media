@@ -6,7 +6,7 @@ const CommentButton = ({ user, post: { comments, id } }) => {
 
   return (
     <Label className="comment-button">
-      <Icon name="comment" />
+      <Icon name="comments" />
       {commentCount} {commentCount === 1 ? "Comment" : "Comments"}
     </Label>
   );

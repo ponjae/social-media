@@ -60,9 +60,26 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: space-between;
   gap: 0.5rem;
 }
 
 .post-page .post-page__actions .ui.label {
   margin: 0;
+}
+
+.post-page .post-page__reactions,
+.post-page .post-page__owner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.post-page .post-page__owner-actions {
+  margin-left: auto;
+}
+
+.post-page .ui.message.post-page__delete-error {
+  margin: 0 0 1rem;
 }

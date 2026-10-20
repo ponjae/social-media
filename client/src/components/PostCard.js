@@ -1,11 +1,12 @@
 import { useContext } from "react";
-import { Card, Icon, Label, Image } from "semantic-ui-react";
+import { Card, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { AuthContext } from "../context/auth";
 import CommentButton from "./Buttons/CommentButton";
 import LikeButton from "./Buttons/LikeButton";
 import DeleteButton from "./Buttons/DeleteButton";
+import EditButton from "./Buttons/EditButton";
 import "./PostCard.css";
 
 const PostCard = ({
@@ -34,10 +35,7 @@ const PostCard = ({
 
         {user && user.username === username && (
           <div className="post-card__owner-actions">
-            <Label as={Link} to={`/posts/${id}`}>
-              <Icon name="edit" />
-              Edit
-            </Label>
+            <EditButton to={`/posts/${id}`} />
             <DeleteButton postId={id} />
           </div>
         )}

@@ -4,29 +4,47 @@ import { FETCH_POSTS_QUERY } from "../../utils/queries";
 import { useMutation } from "@apollo/client/react";
 import "./DeleteButton.css";
 
-const DeleteButton = ({ postId }) => {
-  const [deletePost] = useMutation(DELETE_POST, {
+const DeleteButton = ({ postId, onDeleted, onError }) => {
+  const [deletePost, { loading }] = useMutation(DELETE_POST, {
     variables: { postId },
     refetchQueries: [{ query: FETCH_POSTS_QUERY }],
     awaitRefetchQueries: true,
     onCompleted() {
-      console.log(`Post with ID: ${postId} deleted`);
+      if (onDeleted) {
+        onDeleted(postId);
+      }
     },
     onError(err) {
       console.error(err);
+      if (onError) onError(err);
     },
   });
 
-  const handleDelete = () => {
-    deletePost();
+  const handleDelete = (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+    if (loading) return;
+    deletePost().catch(() => {
+      // Already handled by onError above.
+    });
   };
 
   return (
     <Label
-      className="delete-button post-card__clickable"
+      as="button"
+      type="button"
+      className="delete-button"
+      aria-label="Delete post"
+      title="Delete post"
+      aria-busy={loading || undefined}
+      disabled={loading}
       onClick={handleDelete}
     >
-      <Icon name="trash" className="post-card__trash-icon" />
+      <Icon
+        name={loading ? "spinner" : "trash"}
+        loading={loading}
+        className="delete-button__icon"
+      />
     </Label>
   );
 };

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useQuery } from "@apollo/client/react";
 import moment from "moment";
 import { FETCH_POST_QUERY } from "../utils/queries";
@@ -12,9 +12,11 @@ import {
   Message,
   Segment,
 } from "semantic-ui-react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import LikeButton from "../components/Buttons/LikeButton";
 import CommentButton from "../components/Buttons/CommentButton";
+import EditButton from "../components/Buttons/EditButton";
+import DeleteButton from "../components/Buttons/DeleteButton";
 import { AuthContext } from "../context/auth";
 import availableAvatars from "../utils/avatars";
 import "./PostPage.css";
@@ -22,6 +24,8 @@ import "./PostPage.css";
 const PostPage = () => {
   const { user } = useContext(AuthContext);
   const { id: postId } = useParams();
+  const navigate = useNavigate();
+  const [deleteError, setDeleteError] = useState(null);
 
   const {
     data: { getPost: post } = {},
@@ -56,6 +60,11 @@ const PostPage = () => {
 
   const { body, createdAt, username, avatar } = post;
   const created = moment(createdAt);
+  const isOwner = Boolean(user && user.username === username);
+
+  const handleDeleted = () => {
+    navigate("/", { replace: true });
+  };
 
   return (
     <Container text className="post-page">
@@ -84,9 +93,33 @@ const PostPage = () => {
 
         <Divider className="post-page__divider" />
 
+        {deleteError && (
+          <Message
+            negative
+            size="small"
+            className="post-page__delete-error"
+            onDismiss={() => setDeleteError(null)}
+          >
+            Couldn't delete this post. Please try again.
+          </Message>
+        )}
+
         <footer className="post-page__actions">
-          <LikeButton user={user} post={post} />
-          <CommentButton user={user} post={post} />
+          <div className="post-page__reactions">
+            <LikeButton user={user} post={post} />
+            <CommentButton user={user} post={post} />
+          </div>
+
+          {isOwner && (
+            <div className="post-page__owner-actions">
+              <EditButton />
+              <DeleteButton
+                postId={post.id}
+                onDeleted={handleDeleted}
+                onError={setDeleteError}
+              />
+            </div>
+          )}
         </footer>
       </Segment>
     </Container>

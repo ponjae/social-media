@@ -7,15 +7,14 @@ import {
   Dimmer,
   Divider,
   Header,
-  Icon,
   Image,
-  Label,
   Loader,
   Message,
   Segment,
 } from "semantic-ui-react";
 import { useParams } from "react-router-dom";
 import LikeButton from "../components/Buttons/LikeButton";
+import CommentButton from "../components/Buttons/CommentButton";
 import { AuthContext } from "../context/auth";
 import availableAvatars from "../utils/avatars";
 import "./PostPage.css";
@@ -55,8 +54,7 @@ const PostPage = () => {
     );
   }
 
-  const { body, createdAt, username, avatar, comments } = post;
-  const commentCount = Array.isArray(comments) ? comments.length : 0;
+  const { body, createdAt, username, avatar } = post;
   const created = moment(createdAt);
 
   return (
@@ -88,10 +86,7 @@ const PostPage = () => {
 
         <footer className="post-page__actions">
           <LikeButton user={user} post={post} />
-          <Label className="post-page__comment-count">
-            <Icon name="comment" />
-            {commentCount} {commentCount === 1 ? "Comment" : "Comments"}
-          </Label>
+          <CommentButton user={user} post={post} />
         </footer>
       </Segment>
     </Container>

@@ -3,6 +3,7 @@ import { Card, Icon, Label, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { AuthContext } from "../context/auth";
+import CommentButton from "./Buttons/CommentButton";
 import LikeButton from "./Buttons/LikeButton";
 import DeleteButton from "./Buttons/DeleteButton";
 import "./PostCard.css";
@@ -11,8 +12,6 @@ const PostCard = ({
   post: { id, body, createdAt, username, avatar, likes, comments },
 }) => {
   const { user } = useContext(AuthContext);
-
-  const commentCount = Array.isArray(comments) ? comments.length : 0;
 
   return (
     <Card fluid>
@@ -25,10 +24,12 @@ const PostCard = ({
       <Card.Content extra className="post-card__footer">
         <div>
           <LikeButton user={user} post={{ id, likes }} />
-          <Label className="post-card__clickable" as={Link} to={`/posts/${id}`}>
-            <Icon name="comment" />
-            {commentCount} {commentCount === 1 ? "Comment" : "Comments"}
-          </Label>
+          <CommentButton
+            user={user}
+            post={{ comments, id }}
+            as={Link}
+            to={`/posts/${id}`}
+          />
         </div>
 
         {user && user.username === username && (

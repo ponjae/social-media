@@ -26,7 +26,9 @@
   margin: 0;
   flex-shrink: 0;
   object-fit: cover;
-  box-shadow: 0 0 0 3px #fff, 0 0 0 4px rgba(34, 36, 38, 0.15);
+  box-shadow:
+    0 0 0 3px #fff,
+    0 0 0 4px rgba(34, 36, 38, 0.15);
 }
 
 .post-page .ui.header.post-page__author-text {
@@ -63,27 +65,4 @@
 
 .post-page .post-page__actions .ui.label {
   margin: 0;
-}
-
-.post-page .post-page__actions .ui.label.post-page__comment-count {
-  cursor: pointer;
-}
-
-@media (max-width: 767px) {
-  .post-page {
-    padding: 1rem 0 2rem;
-  }
-
-  .post-page .ui.segment.post-page__card {
-    padding: 1.25rem 1.25rem 1rem;
-  }
-
-  .post-page .ui.avatar.image.post-page__avatar {
-    width: 2.75rem;
-    height: 2.75rem;
-  }
-
-  .post-page .post-page__body {
-    font-size: 1.05rem;
-  }
 }
